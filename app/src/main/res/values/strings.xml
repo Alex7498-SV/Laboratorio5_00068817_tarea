@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="default_id">0</string>
+    <string name="default_name">Nombre</string>
+    <string name="default_weight">Weight</string>
+    <string name="default_experience">Experiencia</string>
+</resources>
