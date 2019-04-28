@@ -1,6 +1,9 @@
 package com.ralex.pokedex.NetUtils
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.net.Uri
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import java.io.IOException
 import java.io.InputStream
@@ -12,48 +15,37 @@ import java.util.*
 
 class NetUtilities {
 
-    val POKE_API_BASE_URL: String = "https://pokeapi.co/api/v2/pokemon?limit=964"
+    companion object {
 
+        val POKE_API_BASE_URL: String = "https://pokeapi.co/api/v2/pokemon?limit=964"
 
-    fun buildUrl(root: String, pokemonID:String): URL {
-        val buildUri: Uri = Uri.parse(POKE_API_BASE_URL)
-            .buildUpon()
-            .build()
-
-        val url = try {
-            URL(buildUri.toString())
-        } catch (e: MalformedURLException ){
-            URL("")
-
+        fun verifyNetwork(activity: AppCompatActivity):Boolean{
+            val connectivityManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE)
+                    as ConnectivityManager
+            val networkInf = connectivityManager.activeNetworkInfo
+            return networkInf != null && networkInf.isConnected
         }
 
-        Log.d("Net", "Url formada: ${url}")
-        return url
-    }
+        fun data():String {
 
-    @Throws(IOException::class)
-    fun getResponseFromHttpUrl(url:URL):String{
 
-        val urlConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
 
-        try {
-            Log.d("Cmurio", "c Conecto")
-            val `input` : InputStream = urlConnection.inputStream
-            Log.d("Cmurio", "c Conecto")
-            val scn: Scanner = Scanner(`input`)
-            scn.useDelimiter("\\A")
+            var inputStream : InputStream? = null
 
-            val hasInput: Boolean = scn.hasNext()
+            try {
 
-            Log.d("Cmurio", scn.toString())
+                val url = URL(POKE_API_BASE_URL)
+                val connection = url.openConnection() as HttpURLConnection
+                connection.requestMethod = "GET"
+                connection.connect()
 
-            return if (hasInput){
-                scn.next()
-            } else {
-                ""
+                inputStream = connection.inputStream
+                return inputStream.bufferedReader().use{
+                    it.readText()
+                }
+            }finally {
+                inputStream?.close()
             }
-        }finally {
-            urlConnection.disconnect()
         }
     }
 }
