@@ -5,14 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.widget.Button
 import com.ralex.pokedex.Adapters.PokeAdapter
-import com.ralex.pokedex.Models.Pokemon
-import com.ralex.pokedex.NetUtils.NetUtilities
+import com.ralex.pokedex.Utils.Pokemon
 import kotlinx.android.synthetic.main.activity_aux.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 

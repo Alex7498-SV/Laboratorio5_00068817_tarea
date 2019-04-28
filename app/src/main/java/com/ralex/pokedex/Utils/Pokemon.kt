@@ -1,4 +1,4 @@
-package com.ralex.pokedex.Models
+package com.ralex.pokedex.Utils
 
 import android.os.Parcel
 import android.os.Parcelable

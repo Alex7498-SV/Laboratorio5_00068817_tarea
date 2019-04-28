@@ -1,12 +1,10 @@
 package com.ralex.pokedex.Adapters
 
-import android.support.v7.view.menu.ActionMenuItemView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.ralex.pokedex.Models.Pokemon
+import com.ralex.pokedex.Utils.Pokemon
 import com.ralex.pokedex.R
 import kotlinx.android.synthetic.main.pokebase.view.*
 
